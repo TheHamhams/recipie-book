@@ -36,7 +36,6 @@ def program_start():
 
 
 def catagory_select():
-    # temporary commands till hash_map is created
     print_catagories()
     response = input("\nWhat catagory would you like to select?\n").lower()
     choice = None
@@ -57,7 +56,17 @@ def print_catagories():
 
 
 def catagory_menu(catagory):
-    print(f"You selected {catagory.name}")
+    response = input(f"""
+    
+    {catagory.name}
+
+    'add': Add a new recipie
+    'delete': Delete a recipie
+    'select': Select a recipie by name
+    'main': Go back to main menu
+    'exit': Exit program
+    
+    """).lower()
 
 def add_catagory_menu():
     pass
