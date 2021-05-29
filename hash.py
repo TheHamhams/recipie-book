@@ -1,5 +1,6 @@
 class HashMap:
-    def __init__(self, array_size):
+    def __init__(self, name, array_size):
+        self.name = name
         self.array_size = array_size
         self.array = [None for item in range(array_size)]
     

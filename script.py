@@ -1,5 +1,9 @@
-catagories = ['test']
+from hash import HashMap
+
+catagories = []
 bad_input = "\nI'm sorry, I didn't recognize that command. Please try again.\n"
+test = HashMap('test', 25)
+catagories.append(test)
 
 def program_start():
     print("Welcome to your recipie book! What would you like to do?")
@@ -33,11 +37,11 @@ def program_start():
 
 def catagory_select():
     # temporary commands till hash_map is created
-    print(catagories)
+    print_catagories()
     response = input("\nWhat catagory would you like to select?\n").lower()
     choice = None
     for catagory in catagories:
-        if response == catagory:
+        if response == catagory.name:
             choice = catagory
     if choice == None:
         print(bad_input)
@@ -46,10 +50,14 @@ def catagory_select():
         catagory_menu(choice)
 
 def print_catagories():
-    pass
+    lst = []
+    for catagory in catagories:
+        lst.append(catagory.name)
+    print(lst)
+
 
 def catagory_menu(catagory):
-    print(f"You selected {catagory}")
+    print(f"You selected {catagory.name}")
 
 def add_catagory_menu():
     pass
