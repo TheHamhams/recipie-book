@@ -100,6 +100,17 @@ def tag_search_menu():
     pass
 
 def add_recipe_menu(category):
+    recipe_name = input("\nWhat is the name of your recipe?\n").lower()
+    confirm = input(f"You entered '{recipe_name}', is this correct? (yes/no) ").lower()
+    if confirm != 'yes':
+        add_recipe_menu(category)
+    # create recipie object and add it to the category hash map
+    recipe = Recipe(recipe_name)
+    category.assign(recipe_name, recipe)
+    print(f"You added '{recipe.name}' to '{category.name}'")
+    add_ingredient_menu(recipe)
+    
+def add_ingredient_menu(recipe):
     pass
 
 def delete_recipe_menu(category):
