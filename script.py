@@ -4,6 +4,10 @@ from recipe import Recipe
 categories = []
 bad_input = "\nI'm sorry, I didn't recognize that command. Please try again.\n"
 test = HashMap('test', 25)
+testipe = Recipe("Testipe")
+pizzape = Recipe("Pizzape")
+test.assign("testipe", testipe)
+test.assign("pizzape", pizzape)
 categories.append(test)
 
 def program_start():
