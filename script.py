@@ -1,29 +1,30 @@
 from hash import HashMap
+from recipie import Recipie
 
-catagories = []
+categories = []
 bad_input = "\nI'm sorry, I didn't recognize that command. Please try again.\n"
 test = HashMap('test', 25)
-catagories.append(test)
+categories.append(test)
 
 def program_start():
     print("Welcome to your recipie book! What would you like to do?")
     response = input("""
     Choose from the following options:
 
-    'catagory': Choose a catagory to open
-    'add': Add a new catagory
-    'delete': delete an existing catagory
+    'category': Choose a category to open
+    'add': Add a new category
+    'delete': delete an existing category
     'ingredient': Search for recipies that contain a certain ingredient
     'tag': Search for recipies that contain a certain tag
     'exit': Exit program
 
     """).lower()
-    if response == 'catagory':
-        catagory_select()
+    if response == 'category':
+        category_select()
     elif response == 'add':
-        add_catagory_menu()
+        add_category_menu()
     elif response == 'delete':
-        delete_catagory_menu()
+        delete_category_menu()
     elif response == 'ingredient':
         ingredient_search_menu()
     elif response == 'tag':
@@ -35,43 +36,43 @@ def program_start():
         program_start()
 
 
-def catagory_select():
-    print_catagories()
-    response = input("\nWhat catagory would you like to select?\n").lower()
+def category_select():
+    print_categories()
+    response = input("\nWhat category would you like to select?\n").lower()
     choice = None
-    for catagory in catagories:
-        if response == catagory.name:
-            choice = catagory
+    for category in categories:
+        if response == category.name:
+            choice = category
     if choice == None:
         print(bad_input)
-        catagory_select()
+        category_select()
     else: 
-        catagory_menu(choice)
+        category_menu(choice)
 
-def print_catagories():
+def print_categories():
     lst = []
-    for catagory in catagories:
-        lst.append(catagory.name)
+    for category in categories:
+        lst.append(category.name)
     print(lst)
 
 
-def catagory_menu(catagory):
+def category_menu(category):
     response = input(f"""
     
-    {catagory.name}
+    {category.name}
 
     'add': Add a new recipie
     'delete': Delete a recipie
     'select': Select a recipie by name
     'main': Go back to main menu
     'exit': Exit program
-    
+
     """).lower()
 
-def add_catagory_menu():
+def add_category_menu():
     pass
 
-def delete_catagory_menu():
+def delete_category_menu():
     pass
 
 
