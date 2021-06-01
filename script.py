@@ -4,8 +4,8 @@ from recipe import Recipe
 categories = []
 bad_input = "\nI'm sorry, I didn't recognize that command. Please try again.\n"
 test = HashMap('test', 25)
-testipe = Recipe("Testipe")
-pizzape = Recipe("Pizzape")
+testipe = Recipe("Testipe", test)
+pizzape = Recipe("Pizzape", test)
 test.assign("testipe", testipe)
 test.assign("pizzape", pizzape)
 categories.append(test)
@@ -105,13 +105,23 @@ def add_recipe_menu(category):
     if confirm != 'yes':
         add_recipe_menu(category)
     # create recipie object and add it to the category hash map
-    recipe = Recipe(recipe_name)
+    recipe = Recipe(recipe_name, category)
     category.assign(recipe_name, recipe)
     print(f"You added '{recipe.name}' to '{category.name}'")
     add_ingredient_menu(recipe)
     
 def add_ingredient_menu(recipe):
-    pass
+    recipe.print_ingredients()
+    ingredient = input("What is the name of the ingredient you would like to add?\n")
+    ammount = input("How much?")
+    recipe.add_ingredient(ingredient, ammount)
+    response = input("Would you like to add another ingredient? (yes/no) ").lower()
+    if response == 'yes':
+        add_ingredient_menu(recipe)
+    else: 
+        category_menu(recipe.category)
+    
+
 
 def delete_recipe_menu(category):
     pass
@@ -124,4 +134,5 @@ def exit_book():
     exit()
 
 
-program_start()
+#program_start()
+add_recipe_menu(test)

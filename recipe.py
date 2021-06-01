@@ -1,13 +1,14 @@
 class Recipe:
-    def __init__(self, name):
+    def __init__(self, name, category):
         self.name = name
-        self.ingredients = []
+        self.ingredients = {}
         self.steps = []
         self.tags = []
+        self.category = category
         
 
-    def add_ingredients(self, ingredient):
-        pass
+    def add_ingredient(self, ingredient, ammount):
+        self.ingredients[ingredient] = ammount
 
     def edit_ingredients(self):
         pass
@@ -19,7 +20,9 @@ class Recipe:
         pass
 
     def print_ingredients(self):
-        pass
+        for key, value in self.ingredients.items():
+            print(f"{value}: {key}")
+
 
     def print_steps(self):
         pass
