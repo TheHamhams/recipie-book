@@ -119,9 +119,27 @@ def add_ingredient_menu(recipe):
     if response == 'yes':
         add_ingredient_menu(recipe)
     else: 
-        category_menu(recipe.category)
-    
+        if recipe.steps == []:
+            add_step_menu(recipe)
+        else: 
+            category_menu(recipe.category)
 
+    
+def add_step_menu(recipe):
+    recipe.print_steps()
+    step = input("What is the next step?\n")
+    recipe.add_step(step)
+    response = input("Would you like to add another step? (yes/no) ").lower()
+    if response == 'yes':
+        add_step_menu(recipe)
+    else: 
+        if recipe.tags == []:
+            add_tag_menu(recipe)
+        else: 
+            category_menu(recipe.category)
+
+def add_tag_menu(recipe):
+    pass
 
 def delete_recipe_menu(category):
     pass
@@ -134,5 +152,4 @@ def exit_book():
     exit()
 
 
-#program_start()
-add_recipe_menu(test)
+program_start()

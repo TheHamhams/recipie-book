@@ -13,8 +13,8 @@ class Recipe:
     def edit_ingredients(self):
         pass
 
-    def add_steps(self):
-        pass
+    def add_step(self, step):
+        self.steps.append(step)
 
     def print_recipe(self):
         pass
@@ -25,7 +25,10 @@ class Recipe:
 
 
     def print_steps(self):
-        pass
+        i = 0
+        while i < len(self.steps):
+            print(f"{i + 1} - {self.steps[i]}")
+            i += 1
 
     def print_tags(self):
         pass
