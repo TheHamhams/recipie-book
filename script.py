@@ -4,15 +4,15 @@ from recipe import Recipe
 categories = []
 bad_input = "\nI'm sorry, I didn't recognize that command. Please try again.\n"
 test = HashMap('test', 25)
-testipe = Recipe("Testipe", test)
-pizzape = Recipe("Pizzape", test)
-test.assign("testipe", testipe)
-testipe.add_ingredient("cheese", "2 cups")
-testipe.add_ingredient("Crackers", "4")
-testipe.add_step("Melt the cheese")
-testipe.add_step("Dip the crackers in the cheese")
-testipe.add_tag("cheesy")
-testipe.add_tag("Cholesterol")
+testipee = Recipe("testipee", test)
+pizzape = Recipe("pizzape", test)
+test.assign("testipee", testipee)
+testipee.add_ingredient("cheese", "2 cups")
+testipee.add_ingredient("Crackers", "4")
+testipee.add_step("Melt the cheese")
+testipee.add_step("Dip the crackers in the cheese")
+testipee.add_tag("cheesy")
+testipee.add_tag("Cholesterol")
 test.assign("pizzape", pizzape)
 categories.append(test)
 
@@ -159,9 +159,9 @@ def delete_recipe_menu(category):
 
 def select_recipe(category):
     recipe_list = []
-    for recipe in category.array:
-        if recipe != None:
-            recipe_list.append(recipe[1].name)
+    for recipes in category.array:
+        if recipes != None:
+            recipe_list.append(recipes[1].name)
     print(recipe_list)
     response = input("Which recipe would you like to select?\n").lower()
     recipe = category.retrieve(response) 
@@ -170,9 +170,34 @@ def select_recipe(category):
     else:
         print(f"I am sorry, I could not find {response}, please try again.")
         select_recipe(category)
+    next = input(f"""
+    What would you like to do next?
+    
+    'edit': Edit recipe
+    'delete': Delete recipe
+    'next': Choose another recipe in '{category.name}'
+    'main': Go back to main menu
+    'exit': Exit program
+
+    """).lower()
+    if next == 'edit':
+        edit_recipe_menu(recipe)
+    elif next == 'delete':
+        confirm = input(f"Are you sure you would like to delete '{recipe.name}'? (yes/no)\n")
+        if confirm == 'yes':
+            print(f"\n'{recipe.name}' deleted\n" )
+            category.remove(recipe.name)
+        select_recipe(category)
         
     
+    elif next == 'exit':
+        exit_book()
+        
 
+
+    
+def edit_recipe_menu(recipe):
+    pass
 
 def exit_book():
     print("\nHappy cooking!")
