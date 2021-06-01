@@ -8,7 +8,7 @@ class Recipe:
         
 
     def add_ingredient(self, ingredient, ammount):
-        self.ingredients[ingredient] = ammount
+        self.ingredients[ingredient.lower()] = ammount
 
     def edit_ingredients(self):
         pass
@@ -17,11 +17,18 @@ class Recipe:
         self.steps.append(step)
 
     def print_recipe(self):
-        pass
+        print(f"\n{self.name}")
+        print("\nIngredients:")
+        self.print_ingredients()
+        print("\nSteps:")
+        self.print_steps()
+        print("\nTags:") 
+        self.print_tags()
+        
 
     def print_ingredients(self):
         for key, value in self.ingredients.items():
-            print(f"{value}: {key}")
+            print(f"{value}- {key}")
 
 
     def print_steps(self):
@@ -40,7 +47,9 @@ class Recipe:
         pass
 
     def add_tag(self, tag):
-        self.tags.append(tag)
+        self.tags.append(tag.lower())
+        print(f"{tag} added")
+        print(self.tags)
 
     def edit_tag(self):
         pass

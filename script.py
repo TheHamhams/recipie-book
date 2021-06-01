@@ -7,6 +7,12 @@ test = HashMap('test', 25)
 testipe = Recipe("Testipe", test)
 pizzape = Recipe("Pizzape", test)
 test.assign("testipe", testipe)
+testipe.add_ingredient("cheese", "2 cups")
+testipe.add_ingredient("Crackers", "4")
+testipe.add_step("Melt the cheese")
+testipe.add_step("Dip the crackers in the cheese")
+testipe.add_tag("cheesy")
+testipe.add_tag("Cholesterol")
 test.assign("pizzape", pizzape)
 categories.append(test)
 
@@ -139,17 +145,39 @@ def add_step_menu(recipe):
             category_menu(recipe.category)
 
 def add_tag_menu(recipe):
-    pass
+    recipe.print_tags()
+    step = input("What is the next step?\n")
+    recipe.add_tag(step)
+    response = input("Would you like to add another tag? (yes/no) ").lower()
+    if response == 'yes':
+        add_tag_menu(recipe)
+    else: 
+        category_menu(recipe.category)
 
 def delete_recipe_menu(category):
     pass
 
 def select_recipe(category):
-    pass
+    recipe_list = []
+    for recipe in category.array:
+        if recipe != None:
+            recipe_list.append(recipe[1].name)
+    print(recipe_list)
+    response = input("Which recipe would you like to select?\n").lower()
+    recipe = category.retrieve(response) 
+    if recipe != None:
+        recipe.print_recipe()
+    else:
+        print(f"I am sorry, I could not find {response}, please try again.")
+        select_recipe(category)
+        
+    
+
 
 def exit_book():
     print("\nHappy cooking!")
     exit()
 
 
-program_start()
+#program_start()
+select_recipe(test)
