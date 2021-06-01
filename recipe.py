@@ -31,7 +31,7 @@ class Recipe:
             i += 1
 
     def print_tags(self):
-        pass
+        print(self.tags)
 
     def edit_category(self, category):
         pass
