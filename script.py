@@ -17,7 +17,7 @@ test.assign("pizzape", pizzape)
 categories.append(test)
 
 def program_start():
-    print("Welcome to your recipe book! What would you like to do?")
+    print("\nWelcome to your recipe book! What would you like to do?")
     response = input("""
     Choose from the following options:
 
@@ -104,8 +104,19 @@ def add_category_menu():
 
 
 def delete_category_menu():
-    pass
-
+    print_categories()
+    response = input("Which category would you like to delete?\n").lower()
+    for category in categories:
+        if response == category.name:
+            confirm = input(f"Are you sure you want to delete '{response}'? This will also delete all recipes in this category. (yes/no)\n")
+            if confirm == 'yes':
+                idx = categories.index(category)
+                categories.pop(idx)
+                program_start()
+            else:
+                program_start()
+    print(f"'{response}', not found.")
+    program_start()
 
 def ingredient_search_menu():
     pass
