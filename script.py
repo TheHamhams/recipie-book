@@ -93,7 +93,15 @@ def category_menu(category):
         category_menu(category)
 
 def add_category_menu():
-    response == input("What is the name of your new category?\n")
+    response = input("What is the name of your new category?\n").lower()
+    confirm = input(f"You entered '{response}', is this correct? (yes/no)\n").lower()
+    if confirm == 'yes':
+        new_category = HashMap(response, 25)
+        categories.append(new_category)
+        category_menu(new_category)
+    else:
+        add_category_menu()
+
 
 def delete_category_menu():
     pass
