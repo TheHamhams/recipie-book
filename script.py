@@ -23,7 +23,7 @@ def program_start():
 
     'category': Choose a category to open
     'add': Add a new category
-    'delete': delete an existing category
+    'delete': Delete an existing category
     'ingredient': Search for recipes that contain a certain ingredient
     'tag': Search for recipes that contain a certain tag
     'exit': Exit program
@@ -146,7 +146,7 @@ def add_step_menu(recipe):
 
 def add_tag_menu(recipe):
     recipe.print_tags()
-    step = input("What is the next step?\n")
+    step = input("What tag would you like to add?\n")
     recipe.add_tag(step)
     response = input("Would you like to add another tag? (yes/no) ").lower()
     if response == 'yes':
@@ -162,6 +162,12 @@ def select_recipe(category):
     for recipes in category.array:
         if recipes != None:
             recipe_list.append(recipes[1].name)
+    if recipe_list == []:
+        empty = input(f"I am sorry, there seems to be no recipies yet in {category.name}, would you like to create one? (yes/no)\n").lower()
+        if empty == 'yes':
+            add_recipe_menu(category)
+        else:
+            category_menu(category)
     print(recipe_list)
     response = input("Which recipe would you like to select?\n").lower()
     recipe = category.retrieve(response) 
@@ -187,12 +193,13 @@ def select_recipe(category):
         if confirm == 'yes':
             print(f"\n'{recipe.name}' deleted\n" )
             category.remove(recipe.name)
-        select_recipe(category)
-        
-    
+        select_recipe(category)   
+    elif next == 'main':
+        program_start()
     elif next == 'exit':
         exit_book()
-        
+    else:
+        category_menu(category)
 
 
     
@@ -204,5 +211,5 @@ def exit_book():
     exit()
 
 
-#program_start()
-select_recipe(test)
+program_start()
+
