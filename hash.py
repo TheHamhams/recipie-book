@@ -75,8 +75,7 @@ class HashMap:
             return None
 
         if possible_return_value[0] == key:
-            self.array.pop(array_index)
-            self.array.append(None)
+            self.array[array_index] = None
             return
 
         retrieval_collisions = 1
@@ -90,8 +89,7 @@ class HashMap:
                 return None
 
             if possible_return_value[0] == key:
-                self.array.pop(retrieving_array_index)
-                self.array.append(None)
+                self.array[retrieving_array_index] = None
                 return
 
             retrieval_collisions += 1
