@@ -93,7 +93,7 @@ def category_menu(category):
         category_menu(category)
 
 def add_category_menu():
-    pass
+    response == input("What is the name of your new category?\n")
 
 def delete_category_menu():
     pass
