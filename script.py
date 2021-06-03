@@ -147,7 +147,7 @@ def add_ingredient_menu(recipe):
         if recipe.steps == []:
             add_step_menu(recipe)
         else: 
-            category_menu(recipe.category)
+            edit_recipe_menu(recipe)
 
     
 def add_step_menu(recipe):
@@ -161,7 +161,7 @@ def add_step_menu(recipe):
         if recipe.tags == []:
             add_tag_menu(recipe)
         else: 
-            category_menu(recipe.category)
+            edit_recipe_menu(recipe)
 
 def add_tag_menu(recipe):
     recipe.print_tags()
@@ -171,7 +171,7 @@ def add_tag_menu(recipe):
     if response == 'yes':
         add_tag_menu(recipe)
     else: 
-        category_menu(recipe.category)
+        edit_recipe_menu(recipe)
 
 def delete_recipe_menu(category):
     recipe_list = []
@@ -251,6 +251,42 @@ def select_recipe(category):
 
     
 def edit_recipe_menu(recipe):
+    recipe.print_recipe()
+    response = input("""
+    What would you like to edit?
+    
+    ingredients: Edit ingredients
+    steps: Edit steps
+    tags: Edit tags
+    back: Go back to category menu
+    main: Go back to main menu
+    exit: Exit program
+
+    """).lower()
+
+    if response == 'ingredients':
+        edit_ingredients(recipe)
+    elif response == 'steps':
+        edit_steps(recipe)
+    elif response == 'tags':
+        edit_tags(recipe)
+    elif response == 'back':
+        category_menu(recipe.category)
+    elif response == 'main':
+        program_start()
+    elif response == 'exit':
+        exit_book()
+    else:
+        print(bad_input)
+        edit_recipe_menu(recipe)
+
+def edit_ingredients(recipe):
+    pass
+
+def edit_steps(recipe):
+    pass
+
+def edit_tags(recipe):
     pass
 
 def exit_book():
