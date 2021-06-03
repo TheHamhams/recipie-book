@@ -267,7 +267,7 @@ def edit_recipe_menu(recipe):
     if response == 'ingredients':
         edit_ingredients_menu(recipe)
     elif response == 'steps':
-        edit_steps(recipe)
+        edit_steps_menu(recipe)
     elif response == 'tags':
         edit_tags(recipe)
     elif response == 'back':
@@ -359,6 +359,37 @@ def delete_ingredient(recipe):
         else:
             delete_ingredient(recipe)
 
+def edit_steps_menu(recipe):
+    recipe.print_steps()
+    response = input("""
+    What would you like to do?
+
+    'add': Add new steps
+    'edit': Change existing steps
+    'delete': Delete a step
+    'back': Go back to recipe menu
+    'main': Go main menu
+    'exit': Exit program
+
+    """).lower()
+
+    
+    if response == 'add':
+        add_step_menu(recipe)
+    elif response == 'edit':
+        edit_steps(recipe)
+    elif response == 'delete':
+        delete_step(recipe)
+    elif response == 'back':
+        edit_recipe_menu(recipe)
+    elif response == 'main':
+        program_start()
+    elif response == 'exit':
+        exit_book()
+    else:
+        print(bad_input)
+        edit_steps_menu(recipe)
+
 def edit_steps(recipe):
     if recipe.steps == []:
         print("I am sorry, there are no steps in this recipe.")
@@ -374,6 +405,33 @@ def edit_steps(recipe):
     if idx in range(len(recipe.steps)):
         new_step = input("What is the new step?\n")
         recipe.steps[idx] = new_step
+        next = input("Would you like to edit another step? (yes/no)\n").lower()
+        if next == 'yes':
+            edit_steps(recipe)
+        else:
+            edit_recipe_menu(recipe)
+    else:
+        print(bad_input)
+        edit_steps(recipe)
+
+def delete_step(recipe):
+    if recipe.steps == []:
+        print("I am sorry, there are no steps in this recipe.")
+        edit_recipe_menu(recipe)
+    recipe.print_steps()
+    response = input("Which step would yo like to delete? (enter step number or 'none')\n")
+    if response == 'none':
+        edit_recipe_menu(recipe)
+    if is_int(response) == False:
+        edit_steps(recipe)
+    idx = int(response)
+    idx -= 1
+    if idx in range(len(recipe.steps)):
+        confirm = input(f"Are you sure you would like to delete step '{response}'? (yes/no)\n").lower()
+        if confirm == 'yes':
+            recipe.steps.pop(idx)
+        else:
+            edit_recipe_menu(recipe)    
         next = input("Would you like to edit another step? (yes/no)\n").lower()
         if next == 'yes':
             edit_steps(recipe)

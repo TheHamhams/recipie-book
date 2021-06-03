@@ -10,9 +10,6 @@ class Recipe:
     def add_ingredient(self, ingredient, amount):
         self.ingredients[ingredient.lower()] = amount
 
-    def edit_ingredients(self):
-        pass
-
     def add_step(self, step):
         self.steps.append(step)
 
@@ -43,16 +40,10 @@ class Recipe:
     def edit_category(self, category):
         pass
 
-    def print_category(self):
-        pass
-
     def add_tag(self, tag):
         self.tags.append(tag.lower())
         print(f"{tag} added")
         print(self.tags)
-
-    def edit_tag(self):
-        pass
 
     def print_tags(self):
         print(self.tags)
