@@ -7,8 +7,8 @@ class Recipe:
         self.category = category
         
 
-    def add_ingredient(self, ingredient, ammount):
-        self.ingredients[ingredient.lower()] = ammount
+    def add_ingredient(self, ingredient, amount):
+        self.ingredients[ingredient.lower()] = amount
 
     def edit_ingredients(self):
         pass
