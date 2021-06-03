@@ -312,6 +312,9 @@ def edit_ingredients_menu(recipe):
         edit_ingredients_menu(recipe)
     
 def edit_ingredients(recipe):
+    if recipe.ingredients == {}:
+        print("I am sorry, there are no ingredients in this recipe.")
+        edit_recipe_menu(recipe)
     recipe.print_ingredients()
     response = input("Which ingredient would you like to change? (type in the ingredient's full name or 'none')\n").lower()
     if response == 'none':
@@ -319,10 +322,10 @@ def edit_ingredients(recipe):
     if response not in recipe.ingredients:
         print(f"I'm sorry, I couldn't find '{response}', please try again\n")
         edit_ingredients(recipe)
-    new_ingredient = input("What is the new ingredient name? (ingredient name or same)\n").lower()
+    new_ingredient = input("What is the new ingredient name? (ingredient name or 'same')\n").lower()
     if new_ingredient == 'same':
         new_ingredient = response
-    new_amount = input("What is the new amount? (new amount or same)\n").lower()
+    new_amount = input("What is the new amount? (new amount or 'same')\n").lower()
     if new_amount == 'same':
         new_amount = recipe.ingredients[response]
     recipe.ingredients[new_ingredient] = recipe.ingredients.pop(response)
@@ -334,7 +337,27 @@ def edit_ingredients(recipe):
         edit_recipe_menu(recipe)
 
 def delete_ingredient(recipe):
-    pass
+    if recipe.ingredients == {}:
+        print("I am sorry, there are no ingredients in this recipe.")
+        edit_recipe_menu(recipe)
+    recipe.print_ingredients()
+    response = input("Which ingredient would you like to delete? (ingredient name or 'none')\n").lower()
+    if response == 'none':
+        edit_recipe_menu(recipe)
+    if response not in recipe.ingredients:
+        print(f"I am sorry, I could not find '{response}', please try again.")
+        delete_ingredient(recipe)
+    else:
+        confirm = input(f"Are you sure you would like to delete '{response}' (yes/no)\n").lower()
+        if confirm == 'yes':
+            del recipe.ingredients[response]
+            next = input(f"'{response}' deleted, would you like to delete another ingredient? (yes/no)\n").lower()
+            if next == 'yes':
+                delete_ingredient(recipe)
+            else:
+                edit_recipe_menu(recipe)
+        else:
+            delete_ingredient(recipe)
 
 def edit_steps(recipe):
     pass
