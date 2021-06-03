@@ -28,7 +28,7 @@ class Recipe:
 
     def print_ingredients(self):
         for key, value in self.ingredients.items():
-            print(f"{value}- {key}")
+            print(f"{value} - {key}")
 
 
     def print_steps(self):

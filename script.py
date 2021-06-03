@@ -265,7 +265,7 @@ def edit_recipe_menu(recipe):
     """).lower()
 
     if response == 'ingredients':
-        edit_ingredients(recipe)
+        edit_ingredients_menu(recipe)
     elif response == 'steps':
         edit_steps(recipe)
     elif response == 'tags':
@@ -280,7 +280,41 @@ def edit_recipe_menu(recipe):
         print(bad_input)
         edit_recipe_menu(recipe)
 
+def edit_ingredients_menu(recipe):
+    recipe.print_ingredients()
+    response = input("""
+    What would you like to do?
+
+    'add': Add new ingredients
+    'edit': Change existing ingredient
+    'delete': Delete an ingredient
+    'back': Go back to recipe menu
+    'main': Go main menu
+    'exit': Exit program
+
+    """).lower()
+
+    
+    if response == 'add':
+        add_ingredient_menu(recipe)
+    elif response == 'edit':
+        edit_ingredients(recipe)
+    elif response == 'delete':
+        delete_ingredient(recipe)
+    elif response == 'back':
+        edit_recipe_menu(recipe)
+    elif response == 'main':
+        program_start()
+    elif response == 'exit':
+        exit_book()
+    else:
+        print(bad_input)
+        edit_ingredients_menu(recipe)
+    
 def edit_ingredients(recipe):
+    pass
+
+def delete_ingredient(recipe):
     pass
 
 def edit_steps(recipe):
