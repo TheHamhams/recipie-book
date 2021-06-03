@@ -174,7 +174,35 @@ def add_tag_menu(recipe):
         category_menu(recipe.category)
 
 def delete_recipe_menu(category):
-    pass
+    recipe_list = []
+    for recipes in category.array:
+        if recipes != None:
+            recipe_list.append(recipes[1].name)
+    if recipe_list == []:
+        print(f"I am sorry, there seems to be no recipies yet in '{category.name}'\n")
+        category_menu(category)
+    print(recipe_list)
+    response = input("Which recipe would you like to delete?? (recipe name / none)\n").lower()
+    if response == 'none':
+        category_menu(category)
+    recipe = category.retrieve(response)
+    if recipe == None:
+        print(f"I am sorry, I could not find '{response}', please try again.")
+        delete_recipe_menu(category)
+    else:
+        confirm = input(f"Are you sure you would like to delete '{response}'? (yes/no)\n")
+        if confirm == 'yes':
+            print(f"\n'{recipe.name}' deleted\n" )
+            category.remove(recipe.name)
+        else:
+            delete_recipe_menu(category)
+    next = input("Would you like to delete another recipe? (yes/no)\n")
+    if next == 'yes':
+        delete_recipe_menu(category)
+    else:
+        category_menu(category)
+
+    
 
 def select_recipe(category):
     recipe_list = []
