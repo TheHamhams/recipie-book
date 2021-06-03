@@ -360,7 +360,36 @@ def delete_ingredient(recipe):
             delete_ingredient(recipe)
 
 def edit_steps(recipe):
-    pass
+    if recipe.steps == []:
+        print("I am sorry, there are no steps in this recipe.")
+        edit_recipe_menu(recipe)
+    recipe.print_steps()
+    response = input("Which step would yo like to edit (enter step number or 'none')\n")
+    if response == 'none':
+        edit_recipe_menu(recipe)
+    if is_int(response) == False:
+        edit_steps(recipe)
+    idx = int(response)
+    idx -= 1
+    if idx in range(len(recipe.steps)):
+        new_step = input("What is the new step?\n")
+        recipe.steps[idx] = new_step
+        next = input("Would you like to edit another step? (yes/no)\n").lower()
+        if next == 'yes':
+            edit_steps(recipe)
+        else:
+            edit_recipe_menu(recipe)
+    else:
+        print(bad_input)
+        edit_steps(recipe)
+
+def is_int(input):
+    try:
+        val = int(input)
+        return True
+    except ValueError:
+        print("Sorry, that wasnt a number")
+        return False
 
 def edit_tags(recipe):
     pass
@@ -370,5 +399,5 @@ def exit_book():
     exit()
 
 
-program_start()
-
+#program_start()
+edit_steps(testipee)
