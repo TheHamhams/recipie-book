@@ -325,7 +325,7 @@ def edit_recipe_menu(recipe):
     elif response == 'steps':
         edit_steps_menu(recipe)
     elif response == 'tags':
-        edit_tags(recipe)
+        edit_tags_menu(recipe)
     elif response == 'back':
         category_menu(recipe.category)
     elif response == 'main':
@@ -435,6 +435,7 @@ def delete_ingredient(recipe):
         else:
             delete_ingredient(recipe)
 
+# Menu to choose how steps are edited
 def edit_steps_menu(recipe):
     recipe.print_steps()
     response = input("""
@@ -544,7 +545,42 @@ def is_int(input):
         print("Sorry, that wasnt a number")
         return False
 
-def edit_tags(recipe):
+# Menu to choose how tags are edited
+def edit_tags_menu(recipe):
+    recipe.print_tags()
+    
+    response = input("""
+    What would you like to do?
+
+    'add': Add new tag
+    'edit': Change existing tag
+    'delete': Delete a tag
+    'back': Go back to recipe menu
+    'main': Go main menu
+    'exit': Exit program
+
+    """).lower()
+
+    if response == 'add':
+        add_tag_menu(recipe)
+    elif response == 'edit':
+        edit_tag(recipe)
+    elif response == 'delete':
+        delete_tag(recipe)
+    elif response == 'back':
+        edit_recipe_menu(recipe)
+    elif response == 'main':
+        program_start()
+    elif response == 'exit':
+        exit_book()
+    else:
+        print(bad_input)
+        edit_steps_menu(recipe)
+
+def edit_tag(recipe):
+    pass
+
+def delete_tag(recipe):
     pass
 
 # Exit command for program
@@ -554,4 +590,4 @@ def exit_book():
 
 
 #program_start()
-edit_steps(testipee)
+edit_tags_menu(testipee)
