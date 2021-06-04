@@ -176,7 +176,43 @@ def ingredient_search_menu():
 
 
 def tag_search_menu():
-    pass
+    recipe_list = []
+    
+    response = input("What tag would you like to serch for? (name of tag or 'none')\n")
+    
+    if response == 'none':
+        program_start()
+    
+    # Search all recipes in each hash map if they are not none and add the recipe objects to recipe_list
+    for category in categories:
+        for recipe in category.array:
+            if recipe is not None:
+                if response in recipe[1].tags:
+                    recipe_list.append(recipe[1])
+    
+    if recipe_list == []:
+        print(f"I am sorry, I could not find any recipes with '{response}' tag)")
+        ingredient_search_menu()
+
+    recipe_names = []
+
+    # Creates list of recipes names for user to choose from
+    for recipe in recipe_list:
+        recipe_names.append(recipe.name)
+
+    print(recipe_names)
+
+    choice = input("Which recipe would you like to choose? (recipe name or 'none')\n").lower()
+
+    if choice == 'none':
+        ingredient_search_menu()
+
+    if choice in recipe_names:
+        idx = recipe_names.index(choice)
+        edit_recipe_menu(recipe_list[idx])
+    else:
+        print(f"I am sorry, I didn't recognize '{choice}'")
+        ingredient_search_menu()
 
 # Adds recipe to currently selected category
 def add_recipe_menu(category):
