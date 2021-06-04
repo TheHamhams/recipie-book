@@ -605,11 +605,36 @@ def edit_tag(recipe):
     else:
         edit_recipe_menu(recipe)
 
-    
-
-
+# Delete existing tag
 def delete_tag(recipe):
-    pass
+    recipe.print_tags()
+    
+    response = input("Which tag would you like to delete? (enter tag name or 'none')\n").lower()
+
+    if response == 'none':
+        edit_recipe_menu(recipe)
+    
+    idx = 0
+
+    if response in recipe.tags:
+        idx = recipe.tags.index(response)
+    else:
+        print(f"I'm sorry, I couldn't find '{response}', please try again")
+        edit_tag(recipe)
+
+    confirm = input(f"Are you sure you would like to delete '{response}'? (yes/no)\n").lower()
+    
+    if confirm == 'yes':
+        recipe.tags.pop(idx)
+        
+        next = input(f"'{response}' deleted, would you like to delete another tag? (yes/no)\n").lower()
+
+        if next == 'yes':
+            delete_tag(recipe)
+        else:
+            edit_recipe_menu(recipe)
+    else:
+        edit_recipe_menu(recipe)
 
 # Exit command for program
 def exit_book():
