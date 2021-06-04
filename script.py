@@ -577,8 +577,36 @@ def edit_tags_menu(recipe):
         print(bad_input)
         edit_steps_menu(recipe)
 
+# Edit existing tag
 def edit_tag(recipe):
-    pass
+    recipe.print_tags()
+    
+    response = input("Which tag would you like to edit? (enter tag name or 'none')\n").lower()
+
+    if response == 'none':
+        edit_recipe_menu(recipe)
+    
+    idx = 0
+
+    if response in recipe.tags:
+        idx = recipe.tags.index(response)
+    else:
+        print(f"I'm sorry, I couldn't find '{response}', please try again")
+        edit_tag(recipe)
+
+    new_tag = input("What would you like the new tag to be?\n").lower()
+
+    recipe.tags[idx] = new_tag
+
+    next = input("Would you like to edit another tag? (yes/no)\n").lower()
+
+    if next == 'yes':
+        edit_tag(recipe)
+    else:
+        edit_recipe_menu(recipe)
+
+    
+
 
 def delete_tag(recipe):
     pass
